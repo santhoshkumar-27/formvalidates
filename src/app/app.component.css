@@ -1,0 +1,10 @@
+.a {
+  margin-top: 10vh;
+}
+.b {
+  box-shadow: 5px 5px 50px 3px rgb(220, 220, 228),
+    -5px -5px 50px 3px rgb(220, 220, 228);
+}
+.c {
+  text-transform: capitalize;
+}
