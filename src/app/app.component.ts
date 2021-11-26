@@ -10,9 +10,12 @@ export class AppComponent {
   userDetails: FormGroup;
   constructor(){
     this.userDetails= new FormGroup({
-      'title': new FormControl('selected', [Validators.required]),
-      'firstName': new FormControl('')
-})
+      'title': new FormControl('', [Validators.required]),
+      'firstName': new FormControl('',[Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+$')]),
+      'lastName': new FormControl('', [Validators.required, Validators.minLength(1), Validators.pattern('[a-zA-Z]{1,}$')]),
+      'userName': new FormControl('', [Validators.required, Validators.pattern('^([A-Z]|[a-z])+([a-z]|[0-9])+$')]),
+      'newPassword': new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern('.*(?=[a-z])')])
+    })
   }
 
   onSubmit(){
@@ -23,6 +26,15 @@ export class AppComponent {
     return this.userDetails.get('title')
   }
   get firstname(){
-    return this.userDetails.get('firstname')
+    return this.userDetails.get('firstName')
+  }
+  get lastname(){
+    return this.userDetails.get('lastName')
+  }
+  get username(){
+    return this.userDetails.get('userName')
+  }
+  get newPassword(){
+    return this.userDetails.get('newPassword')
   }
 }
