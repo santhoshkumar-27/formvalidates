@@ -8,17 +8,16 @@
           name="title"
           formControlName="title"
           id="autoSizingSelect"
+          [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
         >
           <option value="Mr">Mr</option>
           <option value="Mrs">Mrs</option>
           <option value="Miss">Miss</option>
           <option value="Ms">Ms</option>
         </select>
-        <span
-          class="text-danger c mt-1"
-          *ngIf="title1 && title1.invalid && title1.touched"
-          >*Please select title</span
-        >
+        <div class="text-danger c mt-1" *ngIf="submitted && f.title.errors">
+          <div *ngIf="f.title.errors.required">Title is required</div>
+        </div>
       </div>
     </div>
     <div class="col-md-5">
@@ -34,12 +33,9 @@
           id="exampleFormControlInput1"
           name="firstName"
           formControlName="firstName"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
         />
-        <span
-          class="text-danger c mt-1"
-          *ngIf="firstname && firstname.invalid && firstname.touched"
-          >*Please enter the first Name</span
-        >
+        <span class="text-danger c mt-1">*Please enter the first Name</span>
       </div>
     </div>
     <div class="col-md-5">
@@ -55,12 +51,9 @@
           aria-label="Last name"
           name="lastName"
           formControlName="lastName"
+          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
         />
-        <span
-          class="text-danger c mt-1"
-          *ngIf="lastname && lastname.invalid && lastname.touched"
-          >*Please enter the last name</span
-        >
+        <span class="text-danger c mt-1">*Please enter the last name</span>
       </div>
     </div>
     <div class="col-md-4 mb-3">
@@ -76,13 +69,11 @@
           placeholder="eg*(ASDasdf123)"
           name="userName"
           formControlName="userName"
+          autocomplete="userName"
+          [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
         />
       </div>
-      <span
-        class="text-danger c mt-1"
-        *ngIf="username && username.invalid && username.touched"
-        >*Please enter valid Username</span
-      >
+      <span class="text-danger c mt-1">*Please enter valid Username</span>
     </div>
     <div class="col-md-4">
       <label for="inputPassword1" class="form-label">New Password</label>
@@ -93,12 +84,10 @@
         placeholder="Password"
         name="newPassword"
         formControlName="newPassword"
+        autocomplete="new-password"
+        [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"
       />
-      <span
-        class="text-danger c mt-1"
-        *ngIf="newPassword && newPassword.invalid && newPassword.touched"
-        >*Please enter a valid password</span
-      >
+      <span class="text-danger c mt-1">*Please enter a valid password</span>
     </div>
     <div class="col-md-4">
       <label for="inputPassword2" class="form-label">Confirm Password</label>
@@ -107,6 +96,7 @@
         class="form-control"
         id="inputPassword2"
         placeholder="Password"
+        autocomplete="confirm-password"
       />
       <span class="text-danger c mt-1">*Please repeat the same password</span>
     </div>
@@ -161,7 +151,7 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          type="radio"
+          type="checkbox"
           value="Goat User"
           id="flexCheckDefault"
           name="subscription"
@@ -173,8 +163,8 @@
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
-          type="radio"
-          value=""
+          type="checkbox"
+          value="Premium User"
           id="flexCheckChecked"
           name="subscription"
           checked
@@ -185,14 +175,10 @@
       </div>
     </div>
     <div class="col-12">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="userDetails.invalid"
-      >
-        Submit
-      </button>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
+    <!-- <pre><code>{{userDetails.invalid | json}}</code></pre> -->
     <pre><code>{{userDetails.value | json}}</code></pre>
   </form>
 </div>
+<!---->
