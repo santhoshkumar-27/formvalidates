@@ -8,12 +8,9 @@
 .c {
   text-transform: capitalize;
 }
-.ng-invalid {
+/* .ng-invalid {
   border-left: 5px solid red;
 }
 .ng-valid {
   border-left: 5px solid green;
-}
-.is-invalid {
-  border: 1px solid red;
-}
+} */

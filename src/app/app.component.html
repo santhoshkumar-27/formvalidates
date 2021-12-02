@@ -1,6 +1,6 @@
 <div class="container b mt-3 px-3">
   <form class="a row" [formGroup]="userDetails" (ngSubmit)="onSubmit()">
-    <div class="col-md-2">
+    <div class="col-md-2 mb-3">
       <div class="mb-3">
         <label class="form-label" for="autoSizingSelect">Your Title</label>
         <select
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 mb-3">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label"
           >First Name</label
@@ -35,10 +35,24 @@
           formControlName="firstName"
           [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
         />
-        <span class="text-danger c mt-1">*Please enter the first Name</span>
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required && f.firstName.value === ''">
+            First Name is required
+          </div>
+          <div
+            *ngIf="
+              f.firstName.status === 'INVALID' &&
+              f.firstName.dirty &&
+              f.firstName.touched &&
+              f.firstName.value !== ''
+            "
+          >
+            Enter the valid First Name
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5 mb-3">
       <div class="mb-3">
         <label for="exampleFormControlInput2" class="form-label"
           >last Name</label
@@ -53,7 +67,21 @@
           formControlName="lastName"
           [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
         />
-        <span class="text-danger c mt-1">*Please enter the last name</span>
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required && f.lastName.value === ''">
+            Last Name is required
+          </div>
+          <div
+            *ngIf="
+              f.lastName.status === 'INVALID' &&
+              f.lastName.dirty &&
+              f.lastName.touched &&
+              f.lastName.value !== ''
+            "
+          >
+            Enter the valid Last Name
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-4 mb-3">
@@ -72,10 +100,24 @@
           autocomplete="userName"
           [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
         />
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required && f.userName.value === ''">
+            User Name is required
+          </div>
+          <div
+            *ngIf="
+              f.userName.status === 'INVALID' &&
+              f.userName.dirty &&
+              f.userName.touched &&
+              f.userName.value !== ''
+            "
+          >
+            Enter the valid User Name
+          </div>
+        </div>
       </div>
-      <span class="text-danger c mt-1">*Please enter valid Username</span>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3">
       <label for="inputPassword1" class="form-label">New Password</label>
       <input
         type="password"
@@ -87,9 +129,14 @@
         autocomplete="new-password"
         [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"
       />
-      <span class="text-danger c mt-1">*Please enter a valid password</span>
+      <div class="text-danger c mt-1" *ngIf="submitted && f.newPassword.errors">
+        <div *ngIf="f.newPassword.errors.required">Password is required</div>
+        <div *ngIf="f.newPassword.errors.minlength">
+          Password must be at least 8 characters
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3">
       <label for="inputPassword2" class="form-label">Confirm Password</label>
       <input
         type="password"
@@ -97,8 +144,20 @@
         id="inputPassword2"
         placeholder="Password"
         autocomplete="confirm-password"
+        formControlName="confirmPassword"
+        [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
       />
-      <span class="text-danger c mt-1">*Please repeat the same password</span>
+      <div
+        class="text-danger c mt-1"
+        *ngIf="submitted && f.confirmPassword.errors"
+      >
+        <div *ngIf="f.confirmPassword.errors.required">
+          Confirm Password is required
+        </div>
+        <div *ngIf="f.confirmPassword.errors.mustMatch">
+          Password should match
+        </div>
+      </div>
     </div>
     <div class="col-md-4 mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -107,20 +166,25 @@
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
+        formControlName="email"
+        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
       />
-      <span class="text-danger c mt-1"
-        >*please enter the valid email address</span
-      >
+      <div class="text-danger c mt-1" *ngIf="submitted && f.email.errors">
+        <div *ngIf="f.email.errors.required">E-Mail is required</div>
+        <div *ngIf="f.email.errors.email">Enter a Valid E-mail address</div>
+      </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mb-3">
       <label class="form-label d-block">Gender</label>
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
           type="radio"
-          name="inlineRadioOptions"
+          name="gender"
           id="inlineRadio1"
           value="male"
+          formControlName="gender"
+          [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
         />
         <label class="form-check-label" for="inlineRadio1">male</label>
       </div>
@@ -128,9 +192,11 @@
         <input
           class="form-check-input"
           type="radio"
-          name="inlineRadioOptions"
+          name="gender"
           id="inlineRadio2"
           value="female"
+          formControlName="gender"
+          [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
         />
         <label class="form-check-label" for="inlineRadio2">Female</label>
       </div>
@@ -138,28 +204,20 @@
         <input
           class="form-check-input"
           type="radio"
-          name="inlineRadioOptions"
+          name="gender"
           id="inlineRadio3"
           value="other"
+          formControlName="gender"
+          [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"
         />
         <label class="form-check-label" for="inlineRadio3">other</label>
       </div>
-      <div class="text-danger c mt-1">*please select the Gender</div>
-    </div>
-    <div class="col-md-4">
-      <p>Subscription pack</p>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value="Goat User"
-          id="flexCheckDefault"
-          name="subscription"
-        />
-        <label class="form-check-label" for="flexCheckDefault">
-          Goat User
-        </label>
+      <div class="text-danger c mt-1" *ngIf="submitted && f.gender.errors">
+        <div *ngIf="f.gender.errors.required">Gender is required</div>
       </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <p>Subscription pack</p>
       <div class="form-check form-check-inline">
         <input
           class="form-check-input"
@@ -167,11 +225,20 @@
           value="Premium User"
           id="flexCheckChecked"
           name="subscription"
-          checked
+          formControlName="subscription"
+          [ngClass]="{ 'is-invalid': submitted && f.subscription.errors }"
         />
         <label class="form-check-label" for="flexCheckChecked">
           Premium User
         </label>
+      </div>
+      <div
+        class="text-danger c mt-1"
+        *ngIf="submitted && f.subscription.errors"
+      >
+        <div *ngIf="f.subscription.errors.required">
+          subscription is required
+        </div>
       </div>
     </div>
     <div class="col-12">
